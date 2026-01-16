@@ -145,7 +145,7 @@
         `;
         tbody.appendChild(row);
       });
-   <script>
+<script>
   // ----- LAYERS (depth rules) -----
   const layers = [
     { id: "stone", name: "Stone Layer", min: 0, max: 1000 },
@@ -188,10 +188,10 @@
 
   const tbody = document.querySelector("tbody");
 
-  function renderTable(filteredOres) {
+  function renderTable(list) {
     tbody.innerHTML = "";
 
-    filteredOres.forEach(ore => {
+    list.forEach(ore => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${ore.name}</td>
@@ -205,7 +205,6 @@
     });
   }
 
-  // ----- CORE FILTER LOGIC -----
   function oreInLayer(ore, layer) {
     return ore.minDepth < layer.max && ore.maxDepth > layer.min;
   }
@@ -216,11 +215,13 @@
     renderTable(filtered);
   }
 
-  // Show Limestone by default
+  // Default view
   showLayer("limestone");
 </script>
+
   </body>
 </html>
+
 
 
 
