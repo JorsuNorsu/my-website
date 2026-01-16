@@ -93,12 +93,34 @@
       letter-spacing: 0.05em;
       font-size: 13px;
       border-bottom: 2px solid #000;
-      cursor: pointer;
       padding: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
     }
 
-    th.sorted-asc::after { content: " ▲"; font-size: 11px; }
-    th.sorted-desc::after { content: " ▼"; font-size: 11px; }
+    /* Hover hint */
+    thead th[data-sort]:hover {
+      background-color: #374151;
+    }
+
+    /* Default sort hint */
+    thead th[data-sort]::after {
+      content: " ⇅";
+      font-size: 11px;
+      opacity: 0.4;
+    }
+
+    /* Active sort */
+    thead th.sorted-asc::after {
+      content: " ▲";
+      opacity: 1;
+    }
+
+    thead th.sorted-desc::after {
+      content: " ▼";
+      opacity: 1;
+    }
 
     tbody tr {
       border-bottom: 2px solid #000;
@@ -156,7 +178,6 @@
 <div class="container">
   <h1>Ores</h1>
 
-  <!-- FILTERS -->
   <div class="filter-bar">
     <div class="filter-group">
       <label>Layer</label>
@@ -318,8 +339,14 @@
 
   document.querySelectorAll("th[data-sort]").forEach(th => {
     th.onclick = () => {
-      sortKey === th.dataset.sort ? sortDir *= -1 : (sortKey = th.dataset.sort, sortDir = 1);
-      document.querySelectorAll("th").forEach(h => h.classList.remove("sorted-asc", "sorted-desc"));
+      sortKey === th.dataset.sort
+        ? sortDir *= -1
+        : (sortKey = th.dataset.sort, sortDir = 1);
+
+      document.querySelectorAll("th").forEach(h =>
+        h.classList.remove("sorted-asc", "sorted-desc")
+      );
+
       th.classList.add(sortDir === 1 ? "sorted-asc" : "sorted-desc");
       render();
     };
@@ -330,8 +357,6 @@
 
 </body>
 </html>
-
-
 
 
 
