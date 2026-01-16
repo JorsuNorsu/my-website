@@ -238,7 +238,7 @@ let currentLayer="all", searchQuery="", sortKey=null, sortDir=1;
 layers.forEach(l=>{
   const o=document.createElement("option");
   o.value=l.id;
-  o.textContent=l.id.charAt(0).toUpperCase()+l.id.slice(1);
+o.textContent = `${l.icon} ${l.name}`;
   layerSelect.appendChild(o);
 });
 
@@ -318,4 +318,5 @@ document.documentElement.style.setProperty("--filter-height", fb.offsetHeight+"p
 
 </body>
 </html>
+
 
