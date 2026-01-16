@@ -124,6 +124,23 @@ const layers = [
   { id: "magma", name: "Magma & Lava Layer", min: 8000, max: 9000 },
   { id: "void", name: "Void Layer", min: 9000, max: Infinity }
 ];
+// ----- RARITY COLORS (CANON) -----
+const rarityColors = {
+  "Common": "#9ca3af",      // gray
+  "Uncommon": "#4ade80",    // green
+  "Rare": "#38bdf8",        // blue
+  "Epic": "#a855f7",        // purple
+  "Legendary": "#facc15",   // gold
+  "Mythic": "#ec4899",      // pink
+  "Godly": "#ef4444",       // red
+  "Surreal": "#2dd4bf",     // teal
+  "Divine": "#fde68a",      // pale yellow
+  "Immortal": "#f97316",    // orange
+  "Eternal": "#8b5cf6"      // cosmic purple
+};
+
+
+  
 rSelect = document.getElementById("layerSelect");
 
 // populate dropdown
@@ -1621,26 +1638,26 @@ function renderTable(list) {
   tbody.innerHTML = "";
 
   list.forEach(ore => {
-    let depthText;
-
-    if (ore.maxDepth === Infinity) {
-      depthText = `${ore.minDepth}–9000+`;
-    } else {
-      depthText = `${ore.minDepth}–${ore.maxDepth}`;
-    }
-
     const row = document.createElement("tr");
+    const color = rarityColors[ore.group] || "#ffffff";
+
     row.innerHTML = `
-      <td>${ore.name}</td>
+      <td style="color:${color}; font-weight:600;">${ore.name}</td>
       <td>${ore.rarity}</td>
-      <td>${ore.group}</td>
-     <td>${ore.value}</td>
-      <td>${depthText}</td>
+      <td style="color:${color}; font-weight:600;">${ore.group}</td>
+      <td>${ore.value}</td>
+      <td>${
+        ore.maxDepth === Infinity
+          ? `${ore.minDepth}–9000+`
+          : `${ore.minDepth}–${ore.maxDepth}`
+      }</td>
       <td>${ore.health} HP</td>
     `;
+
     tbody.appendChild(row);
   });
 }
+
 
   function oreInLayer(ore, layer) {
     return ore.minDepth < layer.max && ore.maxDepth > layer.min;
@@ -1667,6 +1684,7 @@ renderTable(ores);
 
   </body>
 </html>
+
 
 
 
