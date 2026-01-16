@@ -38,6 +38,49 @@
         margin-top: 20px;
         font-size: 14px;
       }
+<script>
+  const ores = [
+    {
+      name: "Stone",
+      rarity: "1/1",
+      group: "Common",
+      value: "$0.003",
+      depth: "0–1000",
+      health: "10 HP"
+    },
+    {
+      name: "Iron",
+      rarity: "1/200",
+      group: "Common",
+      value: "$0.044",
+      depth: "0–6000",
+      health: "20 HP"
+    },
+    {
+      name: "Diamond",
+      rarity: "1/12,500",
+      group: "Rare",
+      value: "$4.167",
+      depth: "0–9000",
+      health: "96 HP"
+    }
+  ];
+
+  const tbody = document.querySelector("tbody");
+
+  ores.forEach(ore => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${ore.name}</td>
+      <td>${ore.rarity}</td>
+      <td>${ore.group}</td>
+      <td>${ore.value}</td>
+      <td>${ore.depth}</td>
+      <td>${ore.health}</td>
+    `;
+    tbody.appendChild(row);
+  });
+</script>
 
       th, td {
         border: 1px solid #ddd;
@@ -103,6 +146,7 @@
     </div>
   </body>
 </html>
+
 
 
 
