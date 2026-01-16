@@ -73,6 +73,17 @@
       letter-spacing: 0.05em;
       font-size: 13px;
       border-bottom: 2px solid #000;
+      cursor: pointer;
+    }
+
+    th.sorted-asc::after {
+      content: " ▲";
+      font-size: 11px;
+    }
+
+    th.sorted-desc::after {
+      content: " ▼";
+      font-size: 11px;
     }
 
     th, td {
@@ -149,12 +160,12 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Rarity</th>
-        <th>Group</th>
-        <th>Value</th>
-        <th>Depth</th>
-        <th>Health</th>
+        <th data-sort="name">Name</th>
+        <th data-sort="rarity">Rarity</th>
+        <th data-sort="group">Group</th>
+        <th data-sort="value">Value</th>
+        <th data-sort="depth">Depth</th>
+        <th data-sort="health">Health</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -206,8 +217,10 @@
 
   let currentLayer = "all";
   let searchQuery = "";
+  let sortKey = null;
+  let sortDir = 1;
 
-  /* ---------- INIT ---------- */
+  /* ---------- INIT LAYERS ---------- */
   layers.forEach(layer => {
     const option = document.createElement("option");
     option.value = layer.id;
@@ -234,6 +247,32 @@
       );
     }
 
+    if (sortKey) {
+      filtered = [...filtered].sort((a, b) => {
+        let aVal, bVal;
+
+        switch (sortKey) {
+          case "value":
+            aVal = parseFloat(a.value.replace(/[^0-9.]/g, ""));
+            bVal = parseFloat(b.value.replace(/[^0-9.]/g, ""));
+            break;
+          case "depth":
+            aVal = a.minDepth;
+            bVal = b.minDepth;
+            break;
+          default:
+            aVal = a[sortKey];
+            bVal = b[sortKey];
+        }
+
+        if (typeof aVal === "string") {
+          return aVal.localeCompare(bVal) * sortDir;
+        }
+
+        return (aVal - bVal) * sortDir;
+      });
+    }
+
     return filtered;
   }
 
@@ -243,9 +282,7 @@
     if (list.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="6" class="no-results">
-            No ores found
-          </td>
+          <td colspan="6" class="no-results">No ores found</td>
         </tr>
       `;
       resultCount.textContent = "0 ores";
@@ -254,8 +291,8 @@
 
     list.forEach(ore => {
       const bg = rarityColors[ore.group] || "#ffffff";
-      const row = document.createElement("tr");
 
+      const row = document.createElement("tr");
       row.innerHTML = `
         <td class="rarity-bg" style="background:${bg}">${ore.name}</td>
         <td class="rarity-bg" style="background:${bg}">${ore.rarity}</td>
@@ -284,6 +321,27 @@
   searchInput.addEventListener("input", () => {
     searchQuery = searchInput.value.toLowerCase().trim();
     updateTable();
+  });
+
+  document.querySelectorAll("th[data-sort]").forEach(th => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.sort;
+
+      if (sortKey === key) {
+        sortDir *= -1;
+      } else {
+        sortKey = key;
+        sortDir = 1;
+      }
+
+      document.querySelectorAll("th").forEach(h => {
+        h.classList.remove("sorted-asc", "sorted-desc");
+      });
+
+      th.classList.add(sortDir === 1 ? "sorted-asc" : "sorted-desc");
+
+      updateTable();
+    });
   });
 
   /* ---------- FIRST RENDER ---------- */
