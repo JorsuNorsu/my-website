@@ -145,9 +145,83 @@
         `;
         tbody.appendChild(row);
       });
-    </script>
+   <script>
+  // ----- LAYERS (depth rules) -----
+  const layers = [
+    { id: "stone", name: "Stone Layer", min: 0, max: 1000 },
+    { id: "basalt", name: "Basalt Layer", min: 1000, max: 2000 },
+    { id: "limestone", name: "Limestone Layer", min: 2000, max: 3000 },
+    { id: "gneiss", name: "Gneiss Layer", min: 3000, max: 4000 },
+    { id: "void", name: "Void Layer", min: 9000, max: Infinity }
+  ];
+
+  // ----- ORES (numeric depth truth) -----
+  const ores = [
+    {
+      name: "Coal",
+      rarity: "1/100",
+      group: "Common",
+      value: 0.022,
+      minDepth: 0,
+      maxDepth: Infinity,
+      health: 12
+    },
+    {
+      name: "Limestone Ore",
+      rarity: "1/1",
+      group: "Common",
+      value: 0.003,
+      minDepth: 2000,
+      maxDepth: 3000,
+      health: 20
+    },
+    {
+      name: "Gneiss Ore",
+      rarity: "1/1",
+      group: "Common",
+      value: 0.003,
+      minDepth: 3000,
+      maxDepth: 4000,
+      health: 24
+    }
+  ];
+
+  const tbody = document.querySelector("tbody");
+
+  function renderTable(filteredOres) {
+    tbody.innerHTML = "";
+
+    filteredOres.forEach(ore => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${ore.name}</td>
+        <td>${ore.rarity}</td>
+        <td>${ore.group}</td>
+        <td>$${ore.value}</td>
+        <td>${ore.minDepth}–${ore.maxDepth === Infinity ? "∞" : ore.maxDepth}</td>
+        <td>${ore.health} HP</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  // ----- CORE FILTER LOGIC -----
+  function oreInLayer(ore, layer) {
+    return ore.minDepth < layer.max && ore.maxDepth > layer.min;
+  }
+
+  function showLayer(layerId) {
+    const layer = layers.find(l => l.id === layerId);
+    const filtered = ores.filter(ore => oreInLayer(ore, layer));
+    renderTable(filtered);
+  }
+
+  // Show Limestone by default
+  showLayer("limestone");
+</script>
   </body>
 </html>
+
 
 
 
