@@ -27,25 +27,39 @@
 .side-nav {
   display: flex;
   flex-direction: column;
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.side-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 6px;
-}
-
-.side-nav a {
-  color: #cbd5f5;
+  padding: 14px 0;
   text-decoration: none;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-weight: 500;
-}
-
-.side-nav a:hover {
-  background: rgba(255,255,255,0.06);
-}
-
-.side-nav a.active {
-  background: rgba(59,130,246,0.25);
   color: white;
+  opacity: 0.7;
 }
+
+.side-item:hover {
+  opacity: 1;
+}
+
+.side-item.active {
+  opacity: 1;
+}
+
+.side-item .icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.side-item .label {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
 
 .content {
   flex: 1;
@@ -204,10 +218,18 @@ td:first-child {
   <aside class="sidebar">
     <div class="logo">GR</div>
 
-    <nav class="side-nav">
-      <a href="index.html">Home</a>
-      <a href="ores.html" class="active">Ores</a>
-    </nav>
+   <nav class="side-nav">
+  <a href="index.html" class="side-item">
+    <span class="icon">⌂</span>
+    <span class="label">Home</span>
+  </a>
+
+  <a href="ores.html" class="side-item active">
+    <span class="icon">⛏</span>
+    <span class="label">Ores</span>
+  </a>
+</nav>
+
   </aside>
 
   <main class="content">
@@ -376,6 +398,7 @@ document.documentElement.style.setProperty("--filter-height", fb.offsetHeight+"p
 </div>
 </body>
 </html>
+
 
 
 
