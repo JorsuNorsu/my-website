@@ -131,11 +131,18 @@ body {
 
 .page-title {
   text-align: center;
-  color: white;
+  font-size: 30px;
   font-weight: 600;
-  font-size: 28px;
-  margin: 0 0 20px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 22px;
+
+  color: #e5e7eb;
+  text-shadow:
+    0 0 12px rgba(59,130,246,0.25),
+    0 0 2px rgba(255,255,255,0.15);
 }
+
 
 
 
@@ -145,14 +152,15 @@ body {
   top: 0;
   z-index: 10;
   display: flex;
-  gap: 14px;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
   align-items: flex-end;
   padding: 14px 20px;
-  background: #111827;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, #0a1020, #060b18);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
   color: white;
-  
- width: 100%;
-  box-sizing: border-box;
 }
 
 .filter-group {
@@ -561,6 +569,7 @@ document.documentElement.style.setProperty("--filter-height", fb.offsetHeight+"p
 
 </body>
 </html>
+
 
 
 
