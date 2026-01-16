@@ -241,19 +241,22 @@ body {
 /* ===== TABLE ===== */
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* space between rows */
+  background: transparent;
 }
+
 
 thead th {
   position: sticky;
   top: var(--filter-height);
-  background: #1f2937;
-  color: white;
-  font-size: 13px;
+  background: linear-gradient(180deg, #111827, #020617);
+  color: #e5e7eb;
+  font-size: 12px;
   text-transform: uppercase;
-  padding: 10px;
+  padding: 12px;
   cursor: pointer;
-  border-bottom: 2px solid #000;
+  border: none;
 }
 
 thead th[data-sort]::after {
@@ -266,17 +269,30 @@ thead th.sorted-asc::after { content: " ▲"; opacity: 1; }
 thead th.sorted-desc::after { content: " ▼"; opacity: 1; }
 
 tbody tr {
-  border-bottom: 2px solid #000;
+  background: linear-gradient(180deg, #0b1220, #020617);
+  color: white;
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 
 tbody tr:hover {
-  background: rgba(0,0,0,.04);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.4);
+}
+
+tbody tr td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+tbody tr td:last-child {
+  border-radius: 0 10px 10px 0;
 }
 
 td {
-  padding: 10px;
+  padding: 14px 12px;
   text-align: center;
+  border: none;
 }
+
 
 td:first-child {
   font-weight: 700;
@@ -443,9 +459,9 @@ function render(){
     const bg = rarityColors[o.group] || "#fff";
     tbody.innerHTML+=`
     <tr>
-      <td class="rarity-bg" style="background:${bg}">${o.name}</td>
-      <td class="rarity-bg" style="background:${bg}">${o.rarity}</td>
-      <td class="rarity-bg" style="background:${bg}">${o.group}</td>
+      <td class="rarity-bg">${o.name}</td>
+      <td class="rarity-bg">${o.rarity}</td>
+      <td class="rarity-bg">${o.group}</td>
       <td>${o.value}</td>
       <td>${o.maxDepth===Infinity?`${o.minDepth}–9000+`:`${o.minDepth}–${o.maxDepth}`}</td>
       <td>${o.health} HP</td>
@@ -482,6 +498,7 @@ document.documentElement.style.setProperty("--filter-height", fb.offsetHeight+"p
 
 </body>
 </html>
+
 
 
 
