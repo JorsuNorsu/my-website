@@ -5,9 +5,7 @@
 <title>Ores</title>
 
 <style>
-:root {
-  --filter-height: 72px;
-}
+:root { --filter-height: 72px; }
 
 body {
   margin: 0;
@@ -41,14 +39,14 @@ h1 {
   padding: 20px 0 10px;
 }
 
-/* FILTER BAR (STICKY) */
+/* FILTER BAR */
 .filter-bar {
   position: sticky;
   top: 0;
   z-index: 10;
   display: flex;
-  align-items: flex-end;
   gap: 16px;
+  align-items: flex-end;
   padding: 14px 20px;
   background: #111827;
   color: white;
@@ -75,9 +73,7 @@ h1 {
   min-width: 200px;
 }
 
-.filter-spacer {
-  flex: 1;
-}
+.filter-spacer { flex: 1; }
 
 .reset-btn {
   padding: 8px 14px;
@@ -141,6 +137,10 @@ td {
 
 td:first-child {
   font-weight: 700;
+}
+
+.rarity-bg {
+  font-weight: 600;
 }
 
 .no-results {
@@ -212,6 +212,20 @@ const layers = [
   { id:"void",min:9000,max:Infinity }
 ];
 
+const rarityColors = {
+  Common:"#9ca3af33",
+  Uncommon:"#4ade8033",
+  Rare:"#38bdf833",
+  Epic:"#a855f733",
+  Legendary:"#facc1533",
+  Mythic:"#ec489933",
+  Godly:"#ef444433",
+  Surreal:"#2dd4bf33",
+  Divine:"#fde68a55",
+  Immortal:"#f9731633",
+  Eternal:"#8b5cf633"
+};
+
 const tbody = document.querySelector("tbody");
 const layerSelect = document.getElementById("layerSelect");
 const searchInput = document.getElementById("searchInput");
@@ -261,10 +275,11 @@ function render(){
     tbody.innerHTML=`<tr><td colspan="6" class="no-results">No ores found</td></tr>`;
   }
   list.forEach(o=>{
+    const bg = rarityColors[o.group] || "#fff";
     tbody.innerHTML+=`
     <tr>
-      <td>${o.name}</td>
-      <td>${o.rarity}</td>
+      <td class="rarity-bg" style="background:${bg}">${o.name}</td>
+      <td class="rarity-bg" style="background:${bg}">${o.rarity}</td>
       <td>${o.group}</td>
       <td>${o.value}</td>
       <td>${o.maxDepth===Infinity?`${o.minDepth}–9000+`:`${o.minDepth}–${o.maxDepth}`}</td>
@@ -302,5 +317,6 @@ document.documentElement.style.setProperty("--filter-height", fb.offsetHeight+"p
 
 </body>
 </html>
+
 
 
