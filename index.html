@@ -48,6 +48,31 @@ body {
   margin-bottom: 40px;
   text-decoration: none;
 }
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.discord-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: transform .2s ease, filter .2s ease, opacity .2s ease;
+}
+
+.discord-inline svg {
+  width: 26px;   /* slightly bigger */
+  height: 26px;
+  fill: white;  /* PURE WHITE */
+}
+
+.discord-inline:hover {
+  opacity: 1;
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.6));
+}
 
 .side-nav {
   display: flex;
@@ -167,49 +192,7 @@ body {
       0 0 16px rgba(59,130,246,0.2);
   }
 }
-  /* ===== FLOATING DISCORD ICON ===== */
-.discord-float {
-  position: fixed;
-  top: 16px;
-  right: 18px;
-  z-index: 9999;
 
-  background: none;
-  border: none;
-  pointer-events: auto;
-}
-
-.discord-float a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 36px;
-  height: 36px;
-
-  color: white;
-  opacity: 0.85;
-
-  background: none;
-  border: none;
-  box-shadow: none;
-
-  transition:
-    opacity .2s ease,
-    transform .2s ease,
-    filter .2s ease;
-}
-
-.discord-float a:hover {
-  opacity: 1;
-  transform: scale(1.08);
-  filter: drop-shadow(0 0 14px rgba(88,101,242,0.9));
-}
-
-.discord-float svg {
-  width: 22px;
-  height: 22px;
-}
 
 
 </style>
@@ -223,7 +206,28 @@ body {
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <a href="index.html" class="logo">GR</a>
+   <div class="logo-row">
+  <a href="index.html" class="logo">GR</a>
+
+  <a href="https://discord.com/invite/uryHMfvktF"
+     target="_blank"
+     class="discord-inline"
+     aria-label="Discord">
+    <svg viewBox="0 0 24 24">
+      <path d="M20.3 4.3A19.8 19.8 0 0 0 16 3a14.5 14.5 0 0 0-.7 1.4
+      18.4 18.4 0 0 0-6.6 0A14.5 14.5 0 0 0 8 3a19.8 19.8 0 0 0-4.3 1.3
+      C1.1 8.2.4 12 .8 15.7a19.9 19.9 0 0 0 6 3
+      14.7 14.7 0 0 0 1.3-2.1
+      12.9 12.9 0 0 1-2-.9l.5-.4
+      a14.3 14.3 0 0 0 11.8 0l.5.4
+      a12.9 12.9 0 0 1-2 .9
+      14.7 14.7 0 0 0 1.3 2.1
+      19.9 19.9 0 0 0 6-3
+      c.4-3.7-.3-7.5-2.7-11.4Z"/>
+    </svg>
+  </a>
+</div>
+
 
     <nav class="side-nav">
       <a href="index.html" class="side-item active">
@@ -257,28 +261,11 @@ body {
   </main>
 
 </div>
-<!-- FLOATING DISCORD ICON -->
-<div class="discord-float">
-  <a href="https://discord.com/invite/uryHMfvktF"
-     target="_blank"
-     aria-label="Discord">
-    <svg viewBox="0 0 24 24">
-      <path d="M20.3 4.3A19.8 19.8 0 0 0 16 3a14.5 14.5 0 0 0-.7 1.4
-      18.4 18.4 0 0 0-6.6 0A14.5 14.5 0 0 0 8 3a19.8 19.8 0 0 0-4.3 1.3
-      C1.1 8.2.4 12 .8 15.7a19.9 19.9 0 0 0 6 3
-      14.7 14.7 0 0 0 1.3-2.1
-      12.9 12.9 0 0 1-2-.9l.5-.4
-      a14.3 14.3 0 0 0 11.8 0l.5.4
-      a12.9 12.9 0 0 1-2 .9
-      14.7 14.7 0 0 0 1.3 2.1
-      19.9 19.9 0 0 0 6-3
-      c.4-3.7-.3-7.5-2.7-11.4Z"/>
-    </svg>
-  </a>
-</div>
+
 
 </body>
 </html>
+
 
 
 
