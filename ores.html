@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Gilrock-Ores</title>
+<title>Gilrock - Ores</title>
 
 <style>
 :root {
@@ -156,11 +156,51 @@ body {
 
 .filter-group select,
 .filter-group input {
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: none;
+  padding: 10px 12px;
+  border-radius: 8px;
   font-size: 14px;
   min-width: 200px;
+
+  background: #020617;
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.15);
+  outline: none;
+
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* Placeholder text */
+.filter-group input::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+
+/* Hover */
+.filter-group select:hover,
+.filter-group input:hover {
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* Focus (THIS is the important part) */
+.filter-group select:focus,
+.filter-group input:focus {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 12px rgba(59,130,246,0.35);
+}
+.filter-group select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, white 50%),
+    linear-gradient(135deg, white 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 55%,
+    calc(100% - 13px) 55%;
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
 }
 
 .filter-spacer { flex: 1; }
@@ -428,6 +468,7 @@ document.documentElement.style.setProperty("--filter-height", fb.offsetHeight+"p
 
 </body>
 </html>
+
 
 
 
