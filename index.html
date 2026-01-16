@@ -1,66 +1,108 @@
 <!DOCTYPE html>
-<html>
- <head>
-  <title>My First Website</title>
- <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
-  }
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gilrock - Stuff</title>
 
-  nav {
-    background-color: #1f2937;
-    padding: 15px;
-    text-align: center;
-  }
+<style>
+:root {
+  --accent: #3b82f6;
+}
 
-  nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-  }
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: radial-gradient(circle at top, #0b1220 0%, #020617 60%);
+  color: white;
+}
 
-  .container {
-    max-width: 600px;
-    margin: 60px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    text-align: center;
-  }
+/* ===== LAYOUT ===== */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  button {
-    padding: 12px 25px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #3b82f6;
-    color: white;
-    cursor: pointer;
-  }
+/* ===== HOME PANEL ===== */
+.home-panel {
+  background: linear-gradient(180deg, #0b1220, #020617);
+  padding: 48px 56px;
+  border-radius: 16px;
+  text-align: center;
 
-  button:hover {
-    background-color: #2563eb;
-  }
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.06);
+
+  max-width: 420px;
+  width: 100%;
+}
+
+/* ===== TITLE ===== */
+.home-title {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+
+  color: #e5e7eb;
+  text-shadow:
+    0 0 14px rgba(59,130,246,0.25);
+}
+
+/* ===== SUBTEXT ===== */
+.home-sub {
+  font-size: 15px;
+  color: #9ca3af;
+  margin-bottom: 34px;
+}
+
+/* ===== BUTTON ===== */
+.home-btn {
+  display: inline-block;
+  padding: 12px 22px;
+
+  background: #020617;
+  color: white;
+  text-decoration: none;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+
+  font-size: 14px;
+  letter-spacing: 0.04em;
+
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.home-btn:hover {
+  border-color: rgba(255,255,255,0.35);
+}
+
+.home-btn:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 14px rgba(59,130,246,0.4);
+}
 </style>
-  </head>
+</head>
+
 <body>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="ores.html">Ores</a>
-  </nav>
 
-  <div class="container">
-    <h1>My Website</h1>
-    <p>Welcome to my first real website.</p>
+<div class="page">
+  <div class="home-panel">
+    <h1 class="home-title">Gilrock</h1>
+    <p class="home-sub">Database & information hub</p>
 
-    <a href="ores.html">
-      <button>Ores</button>
-    </a>
+    <a href="ores.html" class="home-btn">Browse Ores</a>
   </div>
+</div>
+
 </body>
 </html>
 
