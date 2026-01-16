@@ -324,6 +324,23 @@ td:first-child {
   color: #666;
   font-style: italic;
 }
+  /* ===== ETERNAL ANIMATION ===== */
+@keyframes eternalPulse {
+  0% {
+    box-shadow: 0 0 0 rgba(170,120,255,0);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(170,120,255,0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(170,120,255,0);
+  }
+}
+
+tbody tr.eternal {
+  animation: eternalPulse 3.5s ease-in-out infinite;
+}
+
 </style>
 </head>
 
@@ -492,17 +509,20 @@ function render(){
   if(!list.length){
     tbody.innerHTML=`<tr><td colspan="6" class="no-results">No ores found</td></tr>`;
   }
- list.forEach(o=>{
-  tbody.innerHTML+=`
-    <tr style="background: ${rarityGradient(o.group)};">
+list.forEach(o => {
+  tbody.innerHTML += `
+    <tr class="${o.group === 'Eternal' ? 'eternal' : ''}"
+        style="background: ${rarityGradient(o.group)};">
       <td>${o.name}</td>
       <td>${o.rarity}</td>
       <td>${o.group}</td>
       <td>${o.value}</td>
-      <td>${o.maxDepth===Infinity ? `${o.minDepth}–9000+` : `${o.minDepth}–${o.maxDepth}`}</td>
+      <td>${o.maxDepth === Infinity ? `${o.minDepth}–9000+` : `${o.minDepth}–${o.maxDepth}`}</td>
       <td>${o.health} HP</td>
-    </tr>`;
+    </tr>
+  `;
 });
+
 
   resultCount.textContent=`${list.length} ores`;
 }
@@ -535,6 +555,7 @@ document.documentElement.style.setProperty("--filter-height", fb.offsetHeight+"p
 
 </body>
 </html>
+
 
 
 
