@@ -42,7 +42,7 @@
     .filter-bar {
       display: flex;
       gap: 16px;
-      align-items: center;
+      align-items: flex-end;
       padding: 15px 20px;
       background: #111827;
       color: white;
@@ -71,6 +71,21 @@
       min-width: 200px;
     }
 
+    .reset-btn {
+      padding: 9px 14px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: none;
+      background: #374151;
+      color: white;
+      cursor: pointer;
+      height: fit-content;
+    }
+
+    .reset-btn:hover {
+      background: #4b5563;
+    }
+
     #resultCount {
       margin-left: auto;
       font-size: 14px;
@@ -96,22 +111,14 @@
       padding: 10px;
       cursor: pointer;
       user-select: none;
-      transition: background-color 0.15s ease;
     }
 
-    /* Hover hint */
-    thead th[data-sort]:hover {
-      background-color: #374151;
-    }
-
-    /* Default sort hint */
     thead th[data-sort]::after {
       content: " ⇅";
       font-size: 11px;
       opacity: 0.4;
     }
 
-    /* Active sort */
     thead th.sorted-asc::after {
       content: " ▲";
       opacity: 1;
@@ -191,6 +198,8 @@
       <input id="searchInput" type="text" placeholder="Ore name...">
     </div>
 
+    <button class="reset-btn" id="resetBtn">Reset</button>
+
     <div id="resultCount"></div>
   </div>
 
@@ -245,6 +254,7 @@
   const layerSelect = document.getElementById("layerSelect");
   const searchInput = document.getElementById("searchInput");
   const resultCount = document.getElementById("resultCount");
+  const resetBtn = document.getElementById("resetBtn");
 
   let currentLayer = "all";
   let searchQuery = "";
@@ -267,7 +277,7 @@
   }
 
   function getFiltered() {
-    let list = ores;
+    let list = [...ores];
 
     if (currentLayer !== "all") {
       const layer = layers.find(l => l.id === currentLayer);
@@ -275,13 +285,11 @@
     }
 
     if (searchQuery) {
-      list = list.filter(o =>
-        o.name.toLowerCase().includes(searchQuery)
-      );
+      list = list.filter(o => o.name.toLowerCase().includes(searchQuery));
     }
 
     if (sortKey) {
-      list = [...list].sort((a, b) => {
+      list.sort((a, b) => {
         let A, B;
         switch (sortKey) {
           case "rarity":
@@ -352,14 +360,27 @@
     };
   });
 
+  resetBtn.onclick = () => {
+    currentLayer = "all";
+    searchQuery = "";
+    sortKey = null;
+    sortDir = 1;
+
+    layerSelect.value = "all";
+    searchInput.value = "";
+
+    document.querySelectorAll("th").forEach(h =>
+      h.classList.remove("sorted-asc", "sorted-desc")
+    );
+
+    render();
+  };
+
   render();
 </script>
 
 </body>
 </html>
-
-
-
 
 
 
