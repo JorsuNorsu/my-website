@@ -206,18 +206,32 @@ body {
 .filter-spacer { flex: 1; }
 
 .reset-btn {
-  padding: 8px 14px;
+  padding: 10px 14px;
   font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #9ca3af;
-  background: transparent;
+  border-radius: 8px;
+
+  background: #020617;
   color: white;
+
+  border: 1px solid rgba(255,255,255,0.15);
   cursor: pointer;
+
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+  transition: border-color .2s ease, box-shadow .2s ease;
 }
 
 .reset-btn:hover {
-  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,0.3);
 }
+
+.reset-btn:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 12px rgba(59,130,246,0.35);
+}
+
 
 #resultCount {
   font-size: 14px;
@@ -468,6 +482,7 @@ document.documentElement.style.setProperty("--filter-height", fb.offsetHeight+"p
 
 </body>
 </html>
+
 
 
 
