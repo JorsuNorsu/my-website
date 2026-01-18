@@ -169,6 +169,54 @@ body {
   border: 1px solid rgba(255,255,255,.15);
   cursor: pointer;
 }
+/* ===== FILTER CONTROLS HOVER & FOCUS ===== */
+
+/* Tabs */
+.tab:hover {
+  opacity: 1;
+  border-color: rgba(255,255,255,0.35);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.tab.active:hover {
+  border-color: var(--accent);
+}
+
+/* Inputs & Selects */
+.filter-group input:hover,
+#buffFilter:hover {
+  border-color: rgba(255,255,255,0.35);
+}
+
+.filter-group input:focus,
+#buffFilter:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 12px rgba(59,130,246,0.35);
+}
+
+/* Reset button */
+.reset-btn:hover {
+  border-color: rgba(255,255,255,0.35);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.reset-btn:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 12px rgba(59,130,246,0.35);
+}
+
+/* Cursor polish */
+.tab,
+.reset-btn,
+#buffFilter {
+  cursor: pointer;
+}
 
 
 #resultCount {
