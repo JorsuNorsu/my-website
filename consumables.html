@@ -562,7 +562,7 @@ if (selectedBuff !== "all") {
     <tr style="background: ${rarityGradient(i.rarity)};">
       <td>${i.name}</td>
       <td>${i.rarity}</td>
-      <td>${i.value ?? "-"}</td>
+      <td>${i.value != null ? `$${i.value}` : "-"}</td>
       <td>${i.craftingUses.join("<br>")}</td>
       <td class="info">
         ${i.information.map(line => `<div class="info-line">${line}</div>`).join("")}
