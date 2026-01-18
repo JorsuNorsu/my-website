@@ -163,36 +163,60 @@ body {
   opacity: .8;
 }
 
-/* ===== TABLE ===== */
+/* ===== TABLE (ORES EXACT COPY) ===== */
 table {
-  width: 100%;
-  table-layout: fixed;
   border-collapse: separate;
-  border-spacing: 0 2px; /* SAME AS ORES */
+  border-spacing: 0 2px;
+  background: transparent;
+  width: 100%;
 }
 
 thead th {
-  padding: 12px;
+  position: sticky;
+  top: var(--filter-height);
+  background: linear-gradient(180deg, #111827, #020617);
+  color: #f1f5f9;
   font-size: 13px;
+  font-weight: 600;
   letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 12px;
+  border: none;
 }
 
-tbody td {
-  padding: 14px 12px;   /* SAME AS ORES */
-  font-size: 14px;
-  line-height: 1.35;    /* tighter */
-  vertical-align: top;
+tbody tr {
+  color: white;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+tbody tr:hover {
+  filter: brightness(1.1);
+}
+
+td {
+  padding: 14px 12px;
+  text-align: center;
+  border: none;
+}
+
+td:first-child {
+  font-weight: 700;
 }
 
 tbody tr td:first-child {
-  border-radius: 6px 0 0 6px; /* SAME AS ORES */
-  font-weight: 700;
+  border-radius: 6px 0 0 6px;
 }
 
 tbody tr td:last-child {
   border-radius: 0 6px 6px 0;
 }
 
+.no-results {
+  text-align: center;
+  padding: 25px;
+  color: #666;
+  font-style: italic;
+}
 
 /* ===== BUFF / DEBUFF ===== */
 .buff { color: #4ade80; font-weight: 600; }
@@ -370,6 +394,12 @@ document.getElementById("resetBtn").onclick = () => {
 };
 
 render();
+  const fb = document.querySelector(".filter-bar");
+document.documentElement.style.setProperty(
+  "--filter-height",
+  fb.offsetHeight + "px"
+);
+
 </script>
 
 </body>
