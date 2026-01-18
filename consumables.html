@@ -249,9 +249,26 @@ tbody tr td:last-child {
   <h1 class="page-title">Consumables & Items</h1>
 
   <div class="container">
-    <div class="filter-bar">
-      <!-- EXACT SAME FILTER CODE YOU ALREADY HAVE -->
+  <div class="filter-bar">
+  <div class="filter-group">
+    <label>Category</label>
+    <div class="tabs">
+      <button class="tab active" data-tab="consumables">Consumables</button>
+      <button class="tab" data-tab="items">Items</button>
     </div>
+  </div>
+
+  <div class="filter-group">
+    <label>Search</label>
+    <input id="searchInput" placeholder="Search name...">
+  </div>
+
+  <div class="filter-spacer"></div>
+
+  <button class="reset-btn" id="resetBtn">Reset</button>
+  <div id="resultCount"></div>
+</div>
+
 
     <table>
       <thead id="tableHead"></thead>
