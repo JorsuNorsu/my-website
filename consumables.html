@@ -353,13 +353,14 @@ const consumableHead = `
 </tr>`;
 
 const itemHead = `
-<tr style="background: ${getRarityGradient(i.rarity)};">
+<tr>
   <th>Name</th>
   <th>Rarity</th>
   <th>Value</th>
   <th>Crafting Uses</th>
   <th>Information</th>
 </tr>`;
+
   function formatEffects(list) {
   return list
     .map(e => {
@@ -399,7 +400,7 @@ function render() {
 
     list.forEach(c => {
       tableBody.innerHTML += `
-        <tr style="background: ${getRarityGradient(i.rarity)};">
+       <tr>
           <td>${c.name}</td>
           <td>${c.duration} min</td>
           <td>${formatEffects(c.buffs)}</td>
@@ -419,16 +420,16 @@ function render() {
       tableBody.innerHTML = `<tr><td colspan="5" class="no-results">No items found</td></tr>`;
     }
 
-    list.forEach(i => {
-      tableBody.innerHTML += `
-        <tr>
-          <td>${i.name}</td>
-          <td class="rarity-${i.rarity.toLowerCase()}">${i.rarity}</td>
-          <td>${i.value ?? "-"}</td>
-          <td>${i.craftingUses.join("<br>")}</td>
-         <td class="info">${i.information.join("<br>")}</td>
-        </tr>`;
-    });
+   list.forEach(i => {
+  tableBody.innerHTML += `
+   <tr style="background: ${getRarityGradient(i.rarity)};">
+      <td>${i.name}</td>
+      <td class="rarity-${i.rarity.toLowerCase()}">${i.rarity}</td>
+      <td>${i.value ?? "-"}</td>
+      <td>${i.craftingUses.join("<br>")}</td>
+      <td class="info">${i.information.join("<br>")}</td>
+    </tr>`;
+});
 
     resultCount.textContent = `${list.length} items`;
   }
