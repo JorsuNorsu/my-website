@@ -234,6 +234,20 @@ tbody tr td:last-child {
 .buff { color: #4ade80; font-weight: 600; }
 .debuff { color: #f87171; font-weight: 600; }
 
+  
+/* ===== INFO COLUMN FIX ===== */
+td.info {
+  text-align: left;
+}
+
+.info-line {
+  margin-bottom: 6px;
+}
+
+.info-line:last-child {
+  margin-bottom: 0;
+}
+
 
 
 </style>
@@ -360,7 +374,10 @@ function render() {
       <td>${c.duration} min</td>
       <td>${formatEffects(c.buffs)}</td>
       <td>${c.debuffs.length ? formatEffects(c.debuffs) : "-"}</td>
-      <td>${c.description}</td>
+      <td class="info">
+         <div class="info-line">${c.description}</div>
+      </td>
+
     </tr>
   `;
 });
@@ -380,7 +397,10 @@ function render() {
       <td>${i.rarity}</td>
       <td>${i.value ?? "-"}</td>
       <td>${i.craftingUses.join("<br>")}</td>
-      <td>${i.information.join("<br>")}</td>
+      <td class="info">
+        ${i.information.map(line => `<div class="info-line">${line}</div>`).join("")}
+      </td>
+
     </tr>
   `;
 });
