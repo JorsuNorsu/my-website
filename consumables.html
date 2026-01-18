@@ -169,6 +169,17 @@ body {
   border: 1px solid rgba(255,255,255,.15);
   cursor: pointer;
 }
+<div class="filter-group" id="buffFilterGroup">
+  <label>Buff Type</label>
+  <select id="buffFilter">
+    <option value="all">All Buffs</option>
+    <option value="luck">Luck</option>
+    <option value="damage">Damage</option>
+    <option value="mining speed">Mining Speed</option>
+    <option value="movement speed">Movement Speed</option>
+    <option value="critical chance">Critical Chance</option>
+  </select>
+</div>
 
 #resultCount {
   align-self: center;
@@ -247,6 +258,20 @@ td.info {
 .info-line:last-child {
   margin-bottom: 0;
 }
+/* ===== BUFF FILTER ===== */
+#buffFilterGroup {
+  display: none; /* hidden by default (items tab) */
+}
+
+#buffFilter {
+  height: var(--control-height);
+  width: var(--control-width);
+  padding: 0 12px;
+  border-radius: 8px;
+  background: #020617;
+  color: white;
+  border: 1px solid rgba(255,255,255,.15);
+}
 
 
 
@@ -304,10 +329,17 @@ td.info {
 const tableHead = document.getElementById("tableHead");
 const tableBody = document.getElementById("tableBody");
 const searchInput = document.getElementById("searchInput");
+const buffFilter = document.getElementById("buffFilter");
+const buffFilterGroup = document.getElementById("buffFilterGroup");
 
-
+let selectedBuff = "all";
 let currentTab = "consumables";
 let search = "";
+  
+buffFilter.onchange = () => {
+  selectedBuff = buffFilter.value;
+  render();
+};
 
 const consumableHead = `
 <tr>
@@ -364,7 +396,15 @@ function render() {
 
   if (currentTab === "consumables") {
     tableHead.innerHTML = consumableHead;
-    const list = consumables.filter(c => c.name.toLowerCase().includes(search));
+   const list = consumables.filter(c => {
+  if (!c.name.toLowerCase().includes(search)) return false;
+
+  if (selectedBuff === "all") return true;
+
+  return c.buffs.some(b =>
+    b.toLowerCase().includes(selectedBuff)
+  );
+});
 
   list.forEach(c => {
   tableBody.innerHTML += `
@@ -408,12 +448,20 @@ function render() {
 }
 
 document.querySelectorAll(".tab").forEach(tab => {
-  tab.onclick = () => {
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-    currentTab = tab.dataset.tab;
-    render();
-  };
+ tab.onclick = () => {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  tab.classList.add("active");
+  currentTab = tab.dataset.tab;
+
+  buffFilterGroup.style.display =
+    currentTab === "consumables" ? "flex" : "none";
+
+  selectedBuff = "all";
+  if (buffFilter) buffFilter.value = "all";
+
+  render();
+};
+
 });
 
 searchInput.oninput = () => {
