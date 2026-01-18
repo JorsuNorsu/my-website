@@ -179,6 +179,25 @@ body {
 .rarity-rare      { color: #38bdf8; }
 .rarity-epic      { color: #a855f7; }
 .rarity-legendary { color: #facc15; }
+  
+/* ===== RARITY ROW STRIP ===== */
+.rarity-row td:first-child {
+  position: relative;
+  overflow: hidden;
+}
+
+.rarity-row td:first-child::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--rarity-gradient);
+  z-index: -1;
+}
+.rarity-common    { --rarity-gradient: linear-gradient(90deg, rgba(148,163,184,0.25), transparent 70%); }
+.rarity-uncommon  { --rarity-gradient: linear-gradient(90deg, rgba(74,222,128,0.28), transparent 70%); }
+.rarity-rare      { --rarity-gradient: linear-gradient(90deg, rgba(56,189,248,0.32), transparent 70%); }
+.rarity-epic      { --rarity-gradient: linear-gradient(90deg, rgba(168,85,247,0.35), transparent 70%); }
+.rarity-legendary { --rarity-gradient: linear-gradient(90deg, rgba(250,204,21,0.38), transparent 70%); }
 
 /* ===== TABLE ===== */
 table {
@@ -411,7 +430,7 @@ function render() {
 
    list.forEach(i => {
   tableBody.innerHTML += `
-   <tr style="background: ${getRarityGradient(i.rarity)};">
+   <tr class="rarity-row rarity-${i.rarity.toLowerCase()}">
       <td>${i.name}</td>
       <td class="rarity-${i.rarity.toLowerCase()}">${i.rarity}</td>
       <td>${i.value ?? "-"}</td>
