@@ -493,10 +493,21 @@ searchInput.oninput = () => {
 };
 
 document.getElementById("resetBtn").onclick = () => {
+  // reset search 
   search = "";
   searchInput.value = "";
+
+  // reset buff filter state 
+  selectedBuff = "all";
+  if (buffFilter) buffFilter.value = "all";
+
+  // show buff filter only on consumables
+  buffFilterGroup.style.display =
+    currentTab === "consumables" ? "flex" : "none";
+
   render();
 };
+
 
 render();
   const fb = document.querySelector(".filter-bar");
