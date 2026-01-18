@@ -335,7 +335,21 @@ const buffFilterGroup = document.getElementById("buffFilterGroup");
 let selectedBuff = "all";
 let currentTab = "consumables";
 let search = "";
-  
+ function getBuffValue(buffList, selectedBuff) {
+  if (!buffList || selectedBuff === "all") return 0;
+
+  for (const buff of buffList) {
+    const lower = buff.toLowerCase();
+
+    if (lower.includes(selectedBuff)) {
+      const match = buff.match(/([0-9]+(\.[0-9]+)?)/);
+      return match ? parseFloat(match[1]) : 0;
+    }
+  }
+
+  return 0;
+}
+ 
 buffFilter.onchange = () => {
   selectedBuff = buffFilter.value;
   render();
@@ -396,7 +410,7 @@ function render() {
 
   if (currentTab === "consumables") {
     tableHead.innerHTML = consumableHead;
-   const list = consumables.filter(c => {
+ let list = consumables.filter(c => {
   if (!c.name.toLowerCase().includes(search)) return false;
 
   if (selectedBuff === "all") return true;
@@ -405,6 +419,15 @@ function render() {
     b.toLowerCase().includes(selectedBuff)
   );
 });
+
+//  SORT BY BUFF STRENGTH (DESC)
+if (selectedBuff !== "all") {
+  list.sort((a, b) =>
+    getBuffValue(b.buffs, selectedBuff) -
+    getBuffValue(a.buffs, selectedBuff)
+  );
+}
+
 
   list.forEach(c => {
   tableBody.innerHTML += `
