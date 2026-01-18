@@ -24,71 +24,8 @@ body {
 }
 
 /* ===== SIDEBAR ===== */
-.sidebar {
-  position: fixed;
-  inset: 0 auto 0 0;
-  width: 96px;
-  background: linear-gradient(180deg, #0b1220, #020617);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0;
-  z-index: 100;
-}
+<link rel="stylesheet" href="sidebar.css">
 
-.logo {
-  font-size: 44px;
-  font-weight: 900;
-  color: var(--accent);
-  text-decoration: none;
-  margin-bottom: 40px;
-}
-
-/* ===== SIDE NAV ===== */
-.side-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  width: 100%;
-}
-
-.side-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 14px 0;
-  text-decoration: none;
-  color: white;
-  opacity: 0.75;
-  transition: opacity .2s ease;
-}
-
-.side-item:hover { opacity: 1; }
-.side-item.active { opacity: 1; }
-
-.side-item.active::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 15%;
-  width: 3px;
-  height: 70%;
-  background: var(--accent);
-  border-radius: 2px;
-}
-
-.side-item svg {
-  width: 34px;
-  height: 34px;
-  fill: white;
-}
-
-.side-item .label {
-  font-size: 12px;
-  opacity: .9;
-}
 
 /* ===== FLOATING DISCORD ===== */
 .discord-float {
@@ -347,6 +284,7 @@ fetch("sidebar.html")
 
 </body>
 </html>
+
 
 
 
