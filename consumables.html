@@ -182,11 +182,21 @@ table {
 }
 
 thead th {
+  position: sticky;
+  top: var(--filter-height);
+
   background: linear-gradient(180deg, #111827, #020617);
-  padding: 12px;
+  color: #f1f5f9;
   font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+
+  padding: 12px;
+  border: none;
+  z-index: 5;
 }
+
 
 tbody tr {
   background: linear-gradient(180deg, #0b1220, #020617);
@@ -282,9 +292,10 @@ const itemHead = `
   <th>Name</th>
   <th>Rarity</th>
   <th>Value</th>
-  <th>Information</th>
   <th>Crafting Uses</th>
+  <th>Information</th>
 </tr>`;
+
 
 function render() {
   tableBody.innerHTML = "";
@@ -325,8 +336,8 @@ function render() {
           <td>${i.name}</td>
           <td>${i.rarity}</td>
           <td>${i.value ?? "-"}</td>
-          <td>${i.information.join("<br>")}</td>
           <td>${i.craftingUses.join("<br>")}</td>
+          <td>${i.information.join("<br>")}</td>
         </tr>`;
     });
 
@@ -355,6 +366,13 @@ document.getElementById("resetBtn").onclick = () => {
 };
 
 render();
+ } 
+  const fb = document.querySelector(".filter-bar");
+document.documentElement.style.setProperty(
+  "--filter-height",
+  fb.offsetHeight + "px"
+);
+
 </script>
 
 </body>
