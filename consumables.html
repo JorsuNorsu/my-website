@@ -277,6 +277,60 @@ tbody td:nth-child(4) {
   color: #f87171; 
   font-weight: 600;
 }
+  /* ===== ORES-STYLE ROWS (APPLIED TO CONSUMABLES + ITEMS) ===== */
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 2px;
+}
+
+tbody tr {
+  background: linear-gradient(180deg, #0b1220, #020617);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.03),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+  transition: filter .15s ease, transform .15s ease;
+}
+
+tbody tr:hover {
+  filter: brightness(1.1);
+}
+
+tbody td {
+  padding: 16px 14px;
+  border: none;
+}
+
+tbody tr td:first-child {
+  border-radius: 6px 0 0 6px;
+  font-weight: 700;
+}
+
+tbody tr td:last-child {
+  border-radius: 0 6px 6px 0;
+}
+/* ===== ITEM RARITY ROW OVERLAYS ===== */
+
+.rarity-common {
+  background: linear-gradient(90deg, rgba(148,163,184,0.22), #0b1220 65%);
+}
+
+.rarity-uncommon {
+  background: linear-gradient(90deg, rgba(74,222,128,0.28), #0b1220 65%);
+}
+
+.rarity-rare {
+  background: linear-gradient(90deg, rgba(56,189,248,0.32), #0b1220 65%);
+}
+
+.rarity-epic {
+  background: linear-gradient(90deg, rgba(168,85,247,0.36), #0b1220 65%);
+}
+
+.rarity-legendary {
+  background: linear-gradient(90deg, rgba(250,204,21,0.40), #0b1220 65%);
+}
+
 </style>
 </head>
 
