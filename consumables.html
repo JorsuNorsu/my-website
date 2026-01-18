@@ -1,1 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Consumables & Items</title>
+
+<style>
+:root {
+  --accent: #3b82f6;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: radial-gradient(circle at top, #0b1220 0%, #020617 60%);
+  color: white;
+}
+
+/* ===== LAYOUT ===== */
+.content {
+  margin-left: 96px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.page-card {
+  background: linear-gradient(180deg, rgba(17,24,39,.85), rgba(2,6,23,.85));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 32px 36px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ===== TABS ===== */
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0 24px;
+}
+
+.tab {
+  background: none;
+  border: 1px solid rgba(255,255,255,.15);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.tab.active {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+.tab:hover {
+  opacity: 1;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead th {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+  opacity: 0.8;
+}
+
+tbody td {
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,.03);
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="content">
+  <div class="page-card">
+    <h1>Consumables & Items</h1>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="consumables">Consumables</button>
+      <button class="tab" data-tab="items">Items</button>
+    </div>
+
+    <table id="dataTable">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</main>
+
+<!-- DATA FILES -->
+<script src="consumables-data.js"></script>
+<script src="items-data.js"></script>
+
+<script>
+const thead = document.querySelector("#dataTable thead");
+const tbody = document.querySelector("#dataTable tbody");
+
+/* ===== HEADERS ===== */
+const consumableHeaders = [
+  "Name",
+  "Duration",
+  "Buffs",
+  "Debuffs",
+  "Information"
+];
+
+const itemHeaders = [
+  "Name",
+  "Rarity",
+  "Value",
+  "Information",
+  "Crafting Uses"
+];
+
+/* ===== CORE RENDER ===== */
+function renderTable(headers, rows) {
+  thead.innerHTML = `
+    <tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr>
+  `;
+  tbody.innerHTML = "";
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+/* ===== CONSUMABLES ===== */
+function renderConsumables() {
+  const rows = consumables.map(c => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${c.name}</td>
+      <td>${c.duration} min</td>
+      <td>${c.buffs.join("<br>")}</td>
+      <td>${c.debuffs.length ? c.debuffs.join("<br>") : "-"}</td>
+      <td>${c.description ?? "-"}</td>
+    `;
+    return tr;
+  });
+
+  renderTable(consumableHeaders, rows);
+}
+
+/* ===== ITEMS ===== */
+function renderItems() {
+  const rows = items.map(i => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${i.name}</td>
+      <td>${i.rarity}</td>
+      <td>${i.value ?? "-"}</td>
+      <td>${i.information.join("<br>")}</td>
+      <td>${i.craftingUses.join("<br>")}</td>
+    `;
+    return tr;
+  });
+
+  renderTable(itemHeaders, rows);
+}
+
+/* ===== TAB LOGIC ===== */
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    if (tab.dataset.tab === "consumables") {
+      renderConsumables();
+    } else {
+      renderItems();
+    }
+  });
+});
+
+/* ===== INITIAL LOAD ===== */
+renderConsumables();
+</script>
+
+</body>
+</html>
 
