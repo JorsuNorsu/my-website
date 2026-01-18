@@ -357,7 +357,7 @@ function render() {
       tableBody.innerHTML = `<tr><td colspan="5" class="no-results">No consumables found</td></tr>`;
     }
 
-  list.forEach(i => {
+list.forEach(i => {
   tableBody.innerHTML += `
     <tr class="rarity-${i.rarity.toLowerCase()}">
       <td>${i.name}</td>
@@ -367,7 +367,6 @@ function render() {
       <td class="info">${i.information.join("<br>")}</td>
     </tr>`;
 });
-
 
     resultCount.textContent = `${list.length} consumables`;
   }
@@ -380,17 +379,17 @@ function render() {
       tableBody.innerHTML = `<tr><td colspan="5" class="no-results">No items found</td></tr>`;
     }
 
-   list.forEach(i => {
+ list.forEach(c => {
   tableBody.innerHTML += `
-  <tr class="rarity-row rarity-${i.rarity.toLowerCase()}"
-  
-      <td>${i.name}</td>
-      <td class="rarity-${i.rarity.toLowerCase()}">${i.rarity}</td>
-      <td>${i.value ?? "-"}</td>
-      <td>${i.craftingUses.join("<br>")}</td>
-      <td class="info">${i.information.join("<br>")}</td>
+    <tr>
+      <td>${c.name}</td>
+      <td>${c.duration} min</td>
+      <td>${formatEffects(c.buffs)}</td>
+      <td>${c.debuffs.length ? formatEffects(c.debuffs) : "-"}</td>
+      <td class="info">${c.description ?? "-"}</td>
     </tr>`;
 });
+
 
     resultCount.textContent = `${list.length} items`;
   }
@@ -431,8 +430,3 @@ document.documentElement.style.setProperty(
 </body>
 </html>
 
-
-
-
-</body>
-</html>
