@@ -617,11 +617,14 @@ document.getElementById("resetBtn").onclick = () => {
 render();
   buffFilterGroup.style.display =
   currentTab === "consumables" ? "flex" : "none";
-  const fb = document.querySelector(".filter-bar");
-document.documentElement.style.setProperty(
-  "--filter-height",
-  fb.offsetHeight + "px"
-);
+const fb = document.querySelector(".filter-bar");
+if (fb) {
+  document.documentElement.style.setProperty(
+    "--filter-height",
+    fb.offsetHeight + "px"
+  );
+}
+
 
 </script>
 
