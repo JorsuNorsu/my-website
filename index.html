@@ -178,6 +178,54 @@ body {
 .home-card a:hover {
   background: rgba(59,130,246,.15);
 }
+  .home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.home-card a.secondary {
+  opacity: 0.85;
+}
+  .updates {
+  margin-top: 28px;
+  text-align: left;
+  opacity: 0.85;
+}
+
+.updates h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.updates ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.updates li {
+  margin-bottom: 6px;
+}
+
+.updates span {
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+<div class="updates">
+  <h3>Updates</h3>
+  <ul>
+    <li><strong>v1.1</strong> – Consumables & Items added <span>(Jan 18)</span></li>
+    <li><strong>v1.0</strong> – Ore browser released <span>(Jan 16)</span></li>
+  </ul>
+</div>
+
 </style>
 </head>
 
@@ -256,13 +304,18 @@ body {
     <div class="home-card">
       <h1>WELCOME</h1>
       <p>Fan-made site compiling information from the game’s Compendium and community reports, organized for easy browsing.</p>
-      <a href="ores.html">Browse Ores</a>
+     <div class="home-actions">
+  <a href="ores.html">Browse Ores</a>
+  <a href="consumables.html" class="secondary">Browse Consumables & Items</a>
+</div>
+
     </div>
   </main>
 </div>
 
 </body>
 </html>
+
 
 
 
