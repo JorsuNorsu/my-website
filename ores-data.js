@@ -1443,6 +1443,15 @@ console.log("ores-data.js loaded");
   health: 100
 },
 {
+  name: "Zodiac",
+  rarity: "1/500,000,000",
+  group: "Immortal",
+  value: "$416,666.667",
+  minDepth: 0,
+  maxDepth: 1000,
+  health: 100
+},
+{
   name: "OJ 287-Ω17",
   rarity: "1/750,000,000",
   group: "Immortal",
