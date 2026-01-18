@@ -173,14 +173,6 @@ body {
   align-self: center;
   opacity: .8;
 }
-/* ===== RARITY COLORS ===== */
-.rarity-common    { color: #e5e7eb; }
-.rarity-uncommon  { color: #4ade80; }
-.rarity-rare      { color: #38bdf8; }
-.rarity-epic      { color: #a855f7; }
-.rarity-legendary { color: #facc15; }
-  
-
 
 
 /* ===== BUFF / DEBUFF COLORS ===== */
@@ -198,6 +190,11 @@ body {
 table {
   border-collapse: separate;
   border-spacing: 0 2px;
+  width: 100%;
+  table-layout: fixed;
+}
+th, td {
+  vertical-align: top;
 }
 
 tbody tr {
@@ -226,27 +223,45 @@ tbody tr td:last-child {
   border-radius: 0 6px 6px 0;
 }
 /* ===== RARITY ROW ACCENTS  ===== */
-
 tbody tr.rarity-common {
-  box-shadow: inset 6px 0 0 rgba(148,163,184,0.6);
+  background: linear-gradient(
+    90deg,
+    rgba(148,163,184,0.18),
+    #0b1220 70%
+  );
 }
 
 tbody tr.rarity-uncommon {
-  box-shadow: inset 6px 0 0 rgba(74,222,128,0.7);
+  background: linear-gradient(
+    90deg,
+    rgba(74,222,128,0.22),
+    #0b1220 70%
+  );
 }
 
 tbody tr.rarity-rare {
-  box-shadow: inset 6px 0 0 rgba(56,189,248,0.8);
+  background: linear-gradient(
+    90deg,
+    rgba(56,189,248,0.26),
+    #0b1220 70%
+  );
 }
 
 tbody tr.rarity-epic {
-  box-shadow: inset 6px 0 0 rgba(168,85,247,0.8);
+  background: linear-gradient(
+    90deg,
+    rgba(168,85,247,0.30),
+    #0b1220 70%
+  );
 }
 
 tbody tr.rarity-legendary {
-  box-shadow: inset 6px 0 0 rgba(250,204,21,0.9);
+  background: linear-gradient(
+    90deg,
+    rgba(250,204,21,0.32),
+    #0b1220 70%
+  );
 }
-
 
 </style>
 </head>
