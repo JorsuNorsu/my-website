@@ -372,6 +372,15 @@ console.log("ores-data.js loaded");
   health: 12
 },
 {
+  name: "Halite",
+  rarity: "1/120",
+  group: "Common",
+  value: "$0.027",
+  minDepth: 2000,
+  maxDepth: 3000,
+  health: 12
+}, 
+{
   name: "Silicon",
   rarity: "1/150",
   group: "Common",
@@ -633,6 +642,15 @@ console.log("ores-data.js loaded");
   health: 28
 },
 {
+  name: "Kyanite",
+  rarity: "1/1,100",
+  group: "Uncommon",
+  value: "$0.293",
+  minDepth: 4000,
+  maxDepth: 5000,
+  health: 30
+},
+{
   name: "Strontium",
   rarity: "1/1,200",
   group: "Uncommon",
@@ -810,6 +828,15 @@ console.log("ores-data.js loaded");
   value: "$1.533",
   minDepth: 4000,
   maxDepth: 5000,
+  health: 26
+},
+{
+  name: "Amber",
+  rarity: "1/6,000",
+  group: "Uncommon",
+  value: "$1.6",
+  minDepth: 2000,
+  maxDepth: 3000,
   health: 26
 },
 {
@@ -1162,6 +1189,15 @@ console.log("ores-data.js loaded");
   minDepth: 5000,
   maxDepth: 6000,
   health: 70
+},
+{
+  name: "Opal",
+  rarity: "1/550,000",
+  group: "Mythic",
+  value: "$366.667",
+  minDepth: 8000,
+  maxDepth: 9000,
+  health: 68
 },
 {
   name: "Luminatite",
