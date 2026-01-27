@@ -714,7 +714,7 @@ console.log("ores-data.js loaded");
   health: 34
 },
 {
-  name: "Platinium",
+  name: "Platinum",
   rarity: "1/1,750",
   group: "Uncommon",
   value: "$0.467",
@@ -1525,3 +1525,4 @@ console.log("ores-data.js loaded");
 }
 
   ];
+window.ores = ores;

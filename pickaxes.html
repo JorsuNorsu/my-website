@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gilrock - Pickaxes</title>
+
+<style>
+:root {
+	--accent: #3b82f6;
+	--control-height: 42px;
+	--control-width: 220px;
+}
+
+/* ===== BASE ===== */
+body {
+	margin: 0;
+	font-family: Inter, system-ui, Arial, sans-serif;
+	background: #020617;
+	color: white;
+}
+
+.app {
+	display: flex;
+	min-height: 100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+	width: 96px;
+	background: linear-gradient(180deg, #0b1220, #020617);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px 0;
+	position: sticky;
+	top: 0;
+	height: 100vh;
+}
+
+.logo {
+	font-size: 44px;
+	font-weight: 900;
+	color: var(--accent);
+	margin-bottom: 40px;
+	text-decoration: none;
+}
+
+.side-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	width: 100%;
+}
+
+.side-item {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+
+	padding: 14px 0;
+	text-decoration: none;
+	color: white;
+	opacity: 0.75;
+
+	transition: opacity .2s ease, box-shadow .2s ease;
+}
+
+.side-item:hover {
+	opacity: 1;
+	box-shadow: inset 0 0 0 9999px rgba(255,255,255,0.06);
+}
+
+.side-item.active { opacity: 1; }
+.side-item svg { width: 34px; height: 34px; fill: white; }
+.side-item.active::after { content: ""; position: absolute; right: 0; top: 15%; width: 3px; height: 70%; background: var(--accent); border-radius: 2px; }
+.side-item .label { font-size: 12px; opacity: .9; }
+
+
+/* ===== CONTENT ===== */
+.content {
+	flex: 1;
+	padding: 30px;
+	background: radial-gradient(ellipse at top, #0b1220 0%, #020617 60%, #000 100%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.page-title {
+	text-align: center;
+	font-size: 30px;
+	letter-spacing: .12em;
+	margin-bottom: 22px;
+}
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	display: flex;
+	gap: 16px;
+	padding: 14px 20px;
+	background: linear-gradient(180deg, #0a1020, #060b18);
+	border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.filter-group {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.filter-group label {
+	font-size: 12px;
+	text-transform: uppercase;
+	opacity: .7;
+}
+
+select.tab {
+	height: var(--control-height);
+	width: var(--control-width);
+	padding: 0 12px;
+	border-radius: 8px;
+	background: #020617;
+	color: white;
+	border: 1px solid rgba(255,255,255,.15);
+	cursor: pointer;
+}
+
+.filter-spacer { flex: 1; }
+
+.reset-btn {
+	height: var(--control-height);
+	padding: 0 16px;
+	border-radius: 8px;
+	background: #020617;
+	color: white;
+	border: 1px solid rgba(255,255,255,.15);
+	cursor: pointer;
+}
+
+select.tab:hover,
+.reset-btn:hover {
+	border-color: rgba(255,255,255,0.35);
+}
+.hint-text {
+	align-self: flex-end;
+	margin-bottom: 6px;
+	font-size: 13px;
+	opacity: 0.65;
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+}
+
+.hint-text::before {
+	content: "⛏ ";
+	opacity: 0.8;
+}
+
+/* ===== TABLE ===== */
+table {
+	border-collapse: separate;
+	border-spacing: 0 2px;
+	width: 100%;
+}
+
+thead th {
+	position: sticky;
+	top: 74px;
+	background: linear-gradient(180deg, #111827, #020617);
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	padding: 16px;
+}
+tbody tr td:first-child {
+	border-radius: 6px 0 0 6px;
+}
+tbody tr td:last-child {
+	border-radius: 0 6px 6px 0;
+}
+
+
+tbody tr {
+	background: linear-gradient(180deg, #0b1220, #020617);
+	border-radius: 6px;
+}
+
+tbody tr:not(:last-child) {
+	box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+}
+tbody tr:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+	filter: brightness(1.15);
+}
+
+
+
+td {
+	padding: 18px 16px;
+	text-align: center;
+	font-size: 15px;
+	vertical-align: middle;
+}
+
+td.name {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.stat {
+	font-size: 15px;
+	font-variant-numeric: tabular-nums;
+}
+
+.stat.damage {
+	font-weight: 700;
+}
+
+.stat.secondary {
+	opacity: 0.75;
+}
+thead th[data-sort] {
+	cursor: pointer;
+}
+
+thead th[data-sort]::after {
+	content: " ⇅";
+	font-size: 11px;
+	opacity: .4;
+}
+
+thead th.sorted-asc::after {
+	content: " ▲";
+	opacity: 1;
+}
+
+thead th.sorted-desc::after {
+	content: " ▼";
+	opacity: 1;
+}
+/* ===== RECIPE MODAL ===== */
+.modal {
+	position: fixed;
+	inset: 0;
+	background: rgba(2,6,23,0.75);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 300;
+}
+
+.modal.hidden {
+	display: none;
+}
+
+.modal-card {
+	background: linear-gradient(180deg, #0b1220, #020617);
+	padding: 24px;
+	border-radius: 12px;
+	min-width: 320px;
+	max-width: 420px;
+	box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+.modal-card h2 {
+	margin: 0 0 12px;
+	font-size: 20px;
+	letter-spacing: 0.04em;
+}
+
+#modalRecipe div {
+	padding: 6px 0;
+	font-size: 15px;
+}
+
+.modal-card button {
+	margin-top: 16px;
+	width: 100%;
+	height: 40px;
+	border-radius: 8px;
+	background: #020617;
+	color: white;
+	border: 1px solid rgba(255,255,255,0.15);
+	cursor: pointer;
+}
+
+.modal-card button:hover {
+	border-color: rgba(255,255,255,0.35);
+}
+/* ===== ORE RARITY COLORS ===== */
+.ore.common   { color: #94a3b8; }
+.ore.uncommon { color: #4ade80; }
+.ore.rare     { color: #38bdf8; }
+.ore.epic     { color: #a855f7; }
+.ore.mythic   { color: #ec4899; }
+.ore.surreal  { color:cadetblue}
+.ore.legendary { color: #facc15; }   
+.ore.godly     { color: #ff2828; }   
+.ore.divine    { color: #ffd75a; }   
+.ore.eternal {
+	background: linear-gradient(90deg, #aa78ff, #22d3ee, #ec4899);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	
+}
+
+/* Recipe row layout */
+.recipe-line {
+	display: flex;
+	justify-content: space-between;
+	font-size: 15px;
+	padding: 4px 0;
+}
+
+.recipe-line .amount {
+	color: rgba(255,255,255,0.65);
+}
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+	<aside class="sidebar">
+		<a href="index.html" class="logo">GR</a>
+ <nav class="side-nav">
+
+	<!-- HOME -->
+	<a href="index.html" class="side-item">
+		<svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v10h-5v-6h-2v6H6V11H3z"/></svg>
+		<span class="label">Home</span>
+	</a>
+
+	<!-- ORES -->
+	<a href="ores.html" class="side-item">
+		<svg viewBox="0 0 24 24"><path d="M3 17l4-9 10-4 4 6-6 10H7z"/></svg>
+		<span class="label">Ores</span>
+	</a>
+
+	<!-- ITEMS -->
+	<a href="consumables.html" class="side-item">
+		<svg viewBox="0 0 24 24"><path d="M9 2h6v2l-1 1v4.1l4.6 7.9A4 4 0 0 1 15.1 22H8.9a4 4 0 0 1-3.5-5.9L10 9.1V5L9 4V2z"/></svg>
+		<span class="label">Items</span>
+	</a>
+
+	<!-- PICKAXES -->
+	<a href="pickaxes.html" class="side-item active">
+  <svg viewBox="0 0 24 24" width="34" height="34">
+    <rect x="11" y="3" width="2" height="18" rx="1" fill="currentColor"/>
+    <path d="M4 6c4-2 12-2 16 0l-1.2 2c-3-1.2-10.6-1.2-13.6 0L4 6z" fill="currentColor"/>
+  </svg>
+  <span class="label">Pickaxes</span>
+</a>
+
+</nav>
+</aside>
+
+<main class="content">
+<h1 class="page-title">Pickaxes</h1>
+
+<div class="container">
+	<div class="filter-bar">
+		<div class="filter-group">
+			<label>Level Selector</label>
+			<select id="tierSelect" class="tab">
+				<option value="0">Base</option>
+				<option value="1">Level 1</option>
+				<option value="2">Level 2</option>
+				<option value="3">Level 3</option>
+				<option value="4">Level 4</option>
+				<option value="5">Level 5</option>
+			</select>
+		</div>
+<div class="hint-text">
+	Click a pickaxe to see its recipe
+</div>
+
+		<div class="filter-spacer"></div>
+		<button class="reset-btn" id="resetBtn">Reset</button>
+	</div>
+
+	<table>
+<thead>
+	<tr>
+		<th>Name</th>
+		<th data-sort="damage">Damage</th>
+		<th data-sort="miningSpeed">Mining Speed</th>
+		<th data-sort="luckBoost">Luck Boost</th>
+		<th data-sort="criticalChance">Crit Chance</th>
+	</tr>
+</thead>
+
+
+		<tbody id="tableBody"></tbody>
+	</table>
+</div>
+</main>
+</div>
+<script src="ores-data.js"></script>
+
+<script type="module">
+import { pickaxeStats } from './pickaxe-stat-data.js';
+import { pickaxeRecipes } from './pickaxe-recipe-data.js';
+
+
+
+const tableBody = document.getElementById('tableBody');
+const tierSelect = document.getElementById('tierSelect');
+
+let sortKey = null;
+let sortDir = 1; // 1 = asc, -1 = desc
+
+
+let currentTier = '0';
+const rarityColors = {
+	Common:   "rgba(148,163,184,0.18)",   
+    Uncommon:"rgba(74,222,128,0.22)",    
+    Rare:    "rgba(56,189,248,0.25)",    
+    Epic:    "rgba(168,85,247,0.28)",    
+    Legendary:"rgba(250,204,21,0.30)",   
+    Mythic:  "rgba(236,72,153,0.30)",
+	Godly:   "rgba(255,40,40,0.45)",    
+	Surreal: "rgba(0,255,220,0.40)",     
+};
+
+function rarityGradient(rarity) {
+	const base = rarityColors[rarity];
+	if (!base) return "linear-gradient(180deg, #0b1220, #020617)";
+
+	return `
+		linear-gradient(
+			90deg,
+			${base} 0%,
+			rgba(11,18,32,0.95) 60%,
+			#0b1220 100%
+		)
+	`;
+}
+function getOreGroup(oreName) {
+	const ore = window.ores?.find(o => o.name === oreName);
+	return ore?.group || "Common";
+}
+
+
+
+
+const pickaxeRarityMap = {
+	"Wooden Pickaxe": "Common",
+	"Stone Pickaxe": "Common",
+
+	"Iron Pickaxe": "Uncommon",
+	"Gold Pickaxe": "Uncommon",
+
+	"Diamond Pickaxe": "Rare",
+
+	"Gemstone Amethyst": "Epic",
+	"Gemstone Ruby": "Epic",
+	"Gemstone Sapphire": "Epic",
+	"Gemstone Emerald": "Epic",
+
+	"Soul Scythe Light": "Mythic",
+	"Soul Scythe Dark": "Mythic",
+
+	"Gravitas Prime": "Surreal"
+};
+function normalizePickaxeName(name) {
+	// Merge Soul Scythe variants
+	if (name.startsWith("Soul Scythe")) return "Soul Scythe";
+
+	// All gemstone pickaxes share one recipe
+	if (name.startsWith("Gemstone")) return "Gemstone Pickaxe";
+
+	return name;
+}
+
+function normalizeLevel(level) {
+	return level === "0" ? "base" : level;
+}
+
+function getRecipe(pickaxeName, level) {
+	const keyName = normalizePickaxeName(pickaxeName);
+	const lvl = normalizeLevel(level);
+
+	const entry = pickaxeRecipes.find(p => p.name === keyName);
+	return entry?.recipes?.[lvl] ?? null;
+}
+
+
+
+
+function render() {
+	tableBody.innerHTML = '';
+
+	let list = [...pickaxeStats];
+
+	if (sortKey) {
+	list.sort((a, b) => {
+		const A = a.stats[currentTier][sortKey];
+		const B = b.stats[currentTier][sortKey];
+		return (A - B) * sortDir;
+	});
+}
+
+
+	list.forEach(p => {
+		const s = p.stats[currentTier];
+		const rarity = pickaxeRarityMap[p.name];
+		const bg = rarityGradient(rarity);
+
+		tableBody.innerHTML += `
+		<tr class="pickaxe-row"
+            data-name="${p.name}"
+            style="background: ${bg};">
+			<td class="name">${p.name}</td>
+			<td class="stat damage">${s.damage}</td>
+			<td class="stat secondary">${s.miningSpeed}%</td>
+			<td class="stat secondary">${s.luckBoost}%</td>
+			<td class="stat secondary">${s.criticalChance}%</td>
+		</tr>`;
+	});
+}
+
+
+document.querySelectorAll("th[data-sort]").forEach(th => {
+	th.addEventListener("click", () => {
+		const key = th.dataset.sort;
+
+		if (sortKey === key) {
+			sortDir *= -1;
+		} else {
+			sortKey = key;
+			sortDir = 1;
+		}
+
+		document.querySelectorAll("th").forEach(h =>
+			h.classList.remove("sorted-asc", "sorted-desc")
+		);
+
+		th.classList.add(sortDir === 1 ? "sorted-asc" : "sorted-desc");
+
+		render();
+	});
+});
+
+
+
+
+tierSelect.onchange = () => {
+	currentTier = tierSelect.value;
+	render();
+};
+
+document.getElementById('resetBtn').onclick = () => {
+	currentTier = '0';
+	tierSelect.value = '0';
+	sortKey = null;
+	sortDir = 1;
+
+	document.querySelectorAll("th")
+		.forEach(h => h.classList.remove("sorted-asc", "sorted-desc"));
+
+	render();
+};
+
+
+render();
+const modal = document.getElementById("recipeModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalRecipe = document.getElementById("modalRecipe");
+const closeModal = document.getElementById("closeModal");
+
+document.addEventListener("click", e => {
+	const row = e.target.closest(".pickaxe-row");
+	if (!row) return;
+
+	const rawName = row.dataset.name;
+	const recipe = getRecipe(rawName, currentTier);
+
+	modalTitle.textContent = `${rawName} — Level ${currentTier} Recipe`;
+
+	if (!recipe || recipe.length === 0) {
+		modalRecipe.innerHTML = "<em>No recipe data</em>";
+	} else {
+	modalRecipe.innerHTML = recipe.map(r => {
+	const group = getOreGroup(r.ore).toLowerCase();
+
+	return `
+		<div class="recipe-line">
+			<span class="ore ${group}">${r.ore}</span>
+			<span class="amount">×${r.amount}</span>
+		</div>
+	`;
+}).join("");
+
+
+
+	}
+
+	modal.classList.remove("hidden");
+});
+
+
+
+
+closeModal.onclick = () => {
+	modal.classList.add("hidden");
+};
+
+modal.onclick = e => {
+	if (e.target === modal) modal.classList.add("hidden");
+};
+
+</script>
+<!-- ===== RECIPE MODAL ===== -->
+<div id="recipeModal" class="modal hidden">
+	<div class="modal-card">
+		<h2 id="modalTitle"></h2>
+		<div id="modalRecipe"></div>
+		<button id="closeModal">Close</button>
+	</div>
+</div>
+
+</body>
+</html>
+
